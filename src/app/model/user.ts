@@ -7,6 +7,7 @@ export class User {
     senha: Number | undefined;
     nome : String | undefined;
     cpf: String | undefined;
+    dataNascimento: String | undefined;
 
     telefones: Array<Telefone> | undefined;
     

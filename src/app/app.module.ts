@@ -13,6 +13,7 @@ import {HttpInterceptorModule} from './service/header-interceptor.service';
 import { UsuarioComponent } from './componente/usuario/usuario/usuario.component';
 import { UsuarioAddComponent } from './componente/usuario/usuario/usuario-add/usuario-add/usuario-add.component';
 import { GuardiaoGuard } from './service/guardiao.guard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -46,7 +47,8 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {}
     routes,
     HttpInterceptorModule,
     NgxMaskModule.forRoot(optionsMask),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
