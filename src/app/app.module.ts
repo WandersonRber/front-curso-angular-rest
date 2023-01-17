@@ -14,6 +14,7 @@ import { UsuarioComponent } from './componente/usuario/usuario/usuario.component
 import { UsuarioAddComponent } from './componente/usuario/usuario/usuario-add/usuario-add/usuario-add.component';
 import { GuardiaoGuard } from './service/guardiao.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 
 
@@ -48,7 +49,8 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {}
     HttpInterceptorModule,
     NgxMaskModule.forRoot(optionsMask),
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    NgxCurrencyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

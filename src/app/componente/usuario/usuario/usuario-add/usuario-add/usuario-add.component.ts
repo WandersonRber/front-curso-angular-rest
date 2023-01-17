@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Profissao } from 'src/app/model/profissao';
 import { Telefone } from 'src/app/model/telefone';
 import { User } from 'src/app/model/user';
 import { UsuarioService } from 'src/app/service/usuario.service';
@@ -79,10 +80,18 @@ export class UsuarioAddComponent implements OnInit {
   usuario = new User();
   fone: any;
   telefone = new Telefone();
+  profissoes: Array<Profissao> = [];
 
   constructor (private  routeActive: ActivatedRoute, private userService: UsuarioService ) { }
 
   ngOnInit() {
+
+    this.userService.getProfissaoList().subscribe(data => {
+      this.profissoes = data;
+      //console.log("aquiiiiiiiiiiiiiiiiii",this.profissoes)
+
+    });
+    
     let id = this.routeActive.snapshot.paramMap.get('id'); 
 
     if(id != null) {
