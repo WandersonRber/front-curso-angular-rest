@@ -4,7 +4,7 @@ import { Telefone } from "./telefone";
 export class User {
 
     id: Number | undefined;
-    login: String | undefined;
+    login: String | undefined| any;
     senha: Number | undefined;
     nome: String | undefined;
     cpf: String | undefined;
