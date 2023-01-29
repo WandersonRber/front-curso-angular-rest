@@ -14,10 +14,10 @@ export class LoginServiceService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  recuperar(login: any) {
+  recuperar(login:any) {
 
     let user = new User();
-    user.login = this.login;
+    user.login = login;
 
     return this.http.post(AppConstants.getBaseUrlPath + 'recuperar/', user).subscribe(data => {
 

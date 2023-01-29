@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   public recuperar(){
     this.loginService.recuperar(this.usuario.login);
+    
   }
 
   ngOnInit() {
