@@ -74,4 +74,9 @@ carregarPagina(pagina: any){
     });
   }
 }
+
+imprimeRelatorio(){
+  return this.usuarioService.downloadPdfRelatorio();
+}
+
 }

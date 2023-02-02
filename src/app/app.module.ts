@@ -15,6 +15,7 @@ import { UsuarioAddComponent } from './componente/usuario/usuario/usuario-add/us
 import { GuardiaoGuard } from './service/guardiao.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { UsuarioReportComponent } from './componente/usuario/usuario-report/usuario-report.component';
 
 
 
@@ -27,7 +28,7 @@ export const appRouters: Routes = [
   {path : 'userList', component : UsuarioComponent, canActivate: [GuardiaoGuard]}, 
   {path : 'usuarioAdd', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
   {path : 'usuarioAdd/:id', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
-
+  {path : 'userReport', component : UsuarioReportComponent, canActivate: [GuardiaoGuard]},
 ];
 
 export const routes: ModuleWithProviders<any> = RouterModule.forRoot(appRouters);
@@ -39,7 +40,8 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {}
     HomeComponent,
     LoginComponent,
     UsuarioComponent,
-    UsuarioAddComponent
+    UsuarioAddComponent,
+    UsuarioReportComponent
   ],
   imports: [
     BrowserModule,

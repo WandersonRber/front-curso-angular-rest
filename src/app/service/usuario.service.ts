@@ -64,4 +64,11 @@ export class UsuarioService {
    }
 
 }
+
+downloadPdfRelatorio(){
+   return this.http.get(AppConstants.baseUrl + 'relatorio', {responseType : 'text'}).subscribe(data =>{
+      document.querySelector<any>('iframe').src = data;
+   });
+}
+
 }
