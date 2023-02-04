@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConstants } from '../app-constants';
+import { UserReport } from '../model/userReport';
 
 
 @Injectable({
@@ -67,6 +68,13 @@ export class UsuarioService {
 
 downloadPdfRelatorio(){
    return this.http.get(AppConstants.baseUrl + 'relatorio', {responseType : 'text'}).subscribe(data =>{
+      document.querySelector<any>('iframe').src = data;
+   });
+}
+
+downloadPdfRelatorioParam(userreport : UserReport){
+
+   return this.http.post(AppConstants.baseUrl + 'relatorio/', userreport, {responseType : 'text'}).subscribe(data =>{
       document.querySelector<any>('iframe').src = data;
    });
 }
