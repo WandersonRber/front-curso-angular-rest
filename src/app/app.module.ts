@@ -1,21 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component'; /* Requisições Ajax */
-import { RouterModule, Routes } from '@angular/router'
-import { ModuleWithProviders } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { HttpInterceptorModule } from './service/header-interceptor.service';
-import { UsuarioComponent } from './componente/usuario/usuario/usuario.component';
-import { UsuarioAddComponent } from './componente/usuario/usuario/usuario-add/usuario-add/usuario-add.component';
-import { GuardiaoGuard } from './service/guardiao.guard';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgChartsModule } from 'ng2-charts';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AppComponent } from './app.component';
+import { BarChartComponent } from './componente/bar-chart/bar-chart.component';
 import { UsuarioReportComponent } from './componente/usuario/usuario-report/usuario-report.component';
+import { UsuarioAddComponent } from './componente/usuario/usuario/usuario-add/usuario-add/usuario-add.component';
+import { UsuarioComponent } from './componente/usuario/usuario/usuario.component';
+import { HomeComponent } from './home/home.component'; /* Requisições Ajax */
+import { LoginComponent } from './login/login.component';
+import { GuardiaoGuard } from './service/guardiao.guard';
+import { HttpInterceptorModule } from './service/header-interceptor.service';
+
 
 export const appRouters: Routes = [
 
@@ -26,6 +28,7 @@ export const appRouters: Routes = [
   { path: 'usuarioAdd', component: UsuarioAddComponent, canActivate: [GuardiaoGuard] },
   { path: 'usuarioAdd/:id', component: UsuarioAddComponent, canActivate: [GuardiaoGuard] },
   { path: 'userReport', component: UsuarioReportComponent, canActivate: [GuardiaoGuard] },
+  { path: 'chart', component:BarChartComponent, canActivate: [GuardiaoGuard] },
 ];
 
 export const routes: ModuleWithProviders<any> = RouterModule.forRoot(appRouters);
@@ -38,7 +41,8 @@ export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {}
     LoginComponent,
     UsuarioComponent,
     UsuarioAddComponent,
-    UsuarioReportComponent
+    UsuarioReportComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,8 @@ export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {}
     NgxMaskModule.forRoot(optionsMask),
     NgxPaginationModule,
     NgbModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

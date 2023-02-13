@@ -1,67 +1,68 @@
-import {HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS, HttpErrorResponse,  HttpEvent, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
+import { HttpInterceptor, HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+
 
 @Injectable()
 export class HeaderInterceptorService implements HttpInterceptor {
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: import("@angular/common/http").HttpRequest<any>, next: import("@angular/common/http").HttpHandler): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
 
-    if (localStorage.getItem('token') !==null ) {
+    if (localStorage.getItem('token') !== null) {
       const token = 'Bearer ' + localStorage.getItem('token');
 
       const tokenRequest = req.clone({
-        headers : req.headers.set('Authorization', token)
+        headers: req.headers.set('Authorization', token)
       });
-    
+
       return next.handle(tokenRequest).pipe(
-        
+
         tap((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse && (event.status === 200 || event.status === 201)){
-            console.info('Sucesso na operação')
+          if (event instanceof HttpResponse && (event.status === 200 || event.status === 201)) {
+            console.info('Sucesso na operação');
           }
         })
-      
-      
-      
-      , catchError(this.processaErro));     
-  
-    }else{
-    return next.handle(req).pipe(catchError(this.processaErro));
-  }
-    
+
+        , catchError(this.processaError));
+    } else {
+      return next.handle(req).pipe(catchError(this.processaError));
+    }
+
   }
 
   constructor() { }
 
-  processaErro(error: HttpErrorResponse){
+
+  processaError(error: HttpErrorResponse) {
     let errorMessage = 'Erro desconhecido';
+
+    console.log(error);
     if (error.error instanceof ErrorEvent) {
       console.error(error.error);
       errorMessage = 'Error: ' + error.error.error;
-    }else{
-      errorMessage = 'Código: ' + error.error.code + '\nMenssagem: ' + error.error.error;
+    } else {
+      if (error.status == 403) {
+        errorMessage = "Acesso negado: Faça o login novamente."
+      } else {
+        errorMessage = 'Código: ' + error.error.code + '\nMensagem: ' + error.error.error;
+      }
     }
-    window.alert(errorMessage);
+    window.alert(errorMessage)
     return throwError(errorMessage);
   }
 
-  }
-
+}
 
 @NgModule({
-  providers : [{
-    provide : HTTP_INTERCEPTORS, 
-    useClass : HeaderInterceptorService,
-    multi : true,
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HeaderInterceptorService,
+    multi: true,
   },
-],
+  ],
 })
 
 export class HttpInterceptorModule {
-  
+
 }

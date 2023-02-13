@@ -79,4 +79,8 @@ export class UsuarioService {
       });
    }
 
+   carregarGrafico() : Observable<any>{
+      return this.http.get(AppConstants.baseUrl + 'grafico');
+   }
+
 }
